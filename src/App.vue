@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <AppHeader @toggle-add-list="toggleAddList" title="TO DO LIST" />
+    <AppHeader :disable="disable" @toggle-add-list="toggleAddList" title="TO DO LIST" />
     <div v-show="showAddList">
       <AddList @add-list="addList" />
     </div>
@@ -24,7 +24,8 @@ export default {
   data() {
     return {
       lists: [],
-      showAddList: false
+      showAddList: false,
+      disable: true
     }
   },
 
@@ -36,14 +37,16 @@ export default {
     addList(list) {
       this.lists = [...this.lists, list]
 
-      if(this.lists.length > 9) {
+      if(this.lists.length > 5) {
         this.toggleAddList()
+        this.disable = false
       }
     },
 
     deleteList(id) {
       if (confirm('Are you sure?')) {
         this.lists = this.lists.filter((list) => list.id !== id)
+        this.disable = true
       }
     },
 

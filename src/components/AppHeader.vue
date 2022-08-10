@@ -1,7 +1,7 @@
 <template>
     <header>
         <h2>{{ title }}</h2>
-        <AppButton @toggle-add-list="$emit('toggle-add-list')" text='+ LIST ITEM' color='steelblue' />
+        <AppButton v-if="disable" @toggle-add-list="$emit('toggle-add-list')" text='+ LIST ITEM' color='steelblue' />
     </header>
 </template>
 
@@ -13,6 +13,10 @@
 
         props: {
             title: String,
+            disable: {
+                type: Boolean,
+                default: true
+            }
         },
 
         components: {
